@@ -8,17 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Signature canvas
     const canvas = document.getElementById('signatureCanvas');
     const context = canvas.getContext('2d');
-    
-    window.addEventListener('resize', resizeCanvas);
-
-    function resizeCanvas() {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-    // Perform any additional resizing logic or re-rendering here if needed
-    }
-
-    // Call the resizeCanvas function initially to set the canvas size
-    resizeCanvas();
 
     let signaturePad = new SignaturePad(canvas);
 
@@ -30,7 +19,32 @@ document.addEventListener("DOMContentLoaded", function () {
     var rect = canvas.getBoundingClientRect(); // Get the position of the canvas relative to the viewport
     var lastX = 0;
     var lastY = 0;
-    
+
+
+    // function startDrawing(e) {
+    //     isDrawing = true;
+    //     [lastX, lastY] = [e.clientX - rect.left, e.clientY - rect.top]; // Adjust the coordinates based on the canvas position
+    // }
+
+    // function draw(e) {
+    //     // if ((e.buttons || e.which) === 1) {
+    //     //     const x = e.pageX, y = e.pageY;
+    //     //     ctx.fillRect(x, y, 1, 1);
+    //     // }
+    //     if (!isDrawing) return;
+    //     var x = e.clientX - rect.left; // Adjust the coordinates based on the canvas position
+    //     var y = e.clientY - rect.top; // Adjust the coordinates based on the canvas position
+    //     ctx.beginPath();
+    //     ctx.moveTo(lastX, lastY);
+    //     ctx.lineTo(x, y);
+    //     ctx.stroke();
+    //     [lastX, lastY] = [x, y];
+    // }
+
+    // function stopDrawing() {
+    //     isDrawing = false
+    //     captureSignature();;
+    // }
     let ongoingTouches = [];
 
     function handleTouchStart(event) {
@@ -87,12 +101,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    // canvas.addEventListener('touchstart', handleTouchStart, false);
-    // canvas.addEventListener('touchmove', handleTouchMove, false);
+    canvas.addEventListener('touchstart', handleTouchStart, false);
+    canvas.addEventListener('touchmove', handleTouchMove, false);
 
 
-    // canvas.addEventListener('mousedown', startDrawing);
-    // canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', stopDrawing);
     canvas.addEventListener('mouseout', stopDrawing);
 
@@ -118,9 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function captureSignature() {
-        let signatureData = signaturePad.toDataURL();
-
-        // const signatureData = canvas.toDataURL();  // Convert canvas to data URL
+        const signatureData = canvas.toDataURL();  // Convert canvas to data URL
         const signatureInput = document.getElementById('signatureInput');
         signatureInput.value = signatureData;
     }
@@ -130,14 +142,46 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 
     function clearSignature(event) {
-        signaturePad.clear();
-
-        // context.clearRect(0, 0, canvas.width, canvas.height);
+        context.clearRect(0, 0, canvas.width, canvas.height);
         captureSignature();  // Clear signature input
-        // previousY = event.offsetY;
+        previousY = event.offsetY;
     }
 
+    function resizeCanvas() {
+        var ratio = Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext("2d").scale(ratio, ratio);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // canvas.clear(); // otherwise isEmpty() might return incorrect value
+    }
 
-    
+    // window.addEventListener("resize", resizeCanvas);
+    // resizeCanvas();
+
+
+    // document.getElementById("registration-form").addEventListener("submit", function (event) {
+    //     event.preventDefault();
+
+    //     var form = event.target;
+    //     var formData = new FormData(form);
+
+    //     var xhr = new XMLHttpRequest();
+    //     xhr.open("POST", form.action);
+    //     xhr.onreadystatechange = function () {
+    //         if (xhr.readyState === XMLHttpRequest.DONE) {
+    //             if (xhr.status === 200) {
+    //                 // console.log(xhr.responseText)
+    //                 // var recordsContainer = document.getElementById("records-container");
+    //                 // recordsContainer.innerHTML = xhr.responseText;
+    //                 form.reset();
+    //             } else {
+    //                 console.error("Error submitting the form.");
+    //             }
+    //         }
+    //     };
+    //     xhr.send(formData);
+    // });
     console.log("HTML page has loaded.");
 });
