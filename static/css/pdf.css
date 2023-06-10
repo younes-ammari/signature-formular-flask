@@ -1,4 +1,3 @@
-
 /* Body and container styling */
 body {
     font-family: Arial, sans-serif;
@@ -23,55 +22,79 @@ table {
     width: 100%;
     min-width: 100%;
 }
-table, th, td {
+
+table,
+th,
+td {
     border: 1px solid black;
     padding: 5px;
 }
-table, th {
+
+table,
+th {
     border: 1px solid black;
     padding: 5px;
     /* font-size: 22px; */
 }
 
-/* .container{
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left: 5vw;
-    padding-right: 5vw;
-} */
 
-.table-headers{
+.table-headers {
     background-color: black;
     color: white;
 }
-.title{
+
+.table-container {
+    outline: none; /* Remove outline border */
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 8px;
+}
+
+@media screen and (max-width: 600px) {
+
+    /* Styles for mobile devices */
+    /* table {
+        display: block;
+        overflow-x: auto;
+    } */
+
+    /* th,
+    td { */
+        /* display: block; */
+        /* text-align: left;
+    } */
+}
+
+.title {
     text-align: center;
-    
+
 }
 
 
 .print-container {
-    /* position: absolute; */
-    /* bottom: 0px;
-    left: 0px;
-    right: 0px;
-    padding: 15px 0px; */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* max-width: 600px; */
-    /* width: 100vw; */
-    width: 100%;
-    align-self: center;
-    margin: 10px 0px;
     /* background-color: #fff; */
-    padding: 10px auto;
+    padding: 10px 10px;
+    max-width: 800px;
+    margin: 10px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     /* border-radius: 8px; */
     /* box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3); */
     /* display: none; */
 }
+
 .print-button {
     /* background-color: #a3aab6; */
     background-color: transparent;
@@ -84,11 +107,14 @@ table, th {
     border-radius: 4px;
     cursor: pointer;
 }
+
 .footer {
     opacity: .5;
     margin: 0px 10px;
+    font-size: 12px;
 }
-.details{
+
+.details {
     /* opacity: .5; */
     font-weight: 300;
     font-size: 14px;
@@ -101,7 +127,7 @@ table, th {
     color: #fff;
     /* color: #13be3e; */
     font-weight: 600;
-    font-size: 17px;
+    font-size: 14px;
     /* margin: 0px 15px; */
     border: none;
     padding: 10px 15px;

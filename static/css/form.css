@@ -37,6 +37,7 @@ p {
 
 .footer {
     opacity: .5;
+    font-size: 12px;
 }
 
 .all-records {
@@ -44,6 +45,7 @@ p {
     text-decoration: none;
     font-weight: 600;
     color: #4285f4;
+    font-size: 14px;
     /* color: #2ce65a; */
 }
 
