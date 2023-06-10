@@ -53,11 +53,11 @@ table, th {
 
 
 .print-container {
-    position: absolute;
-    bottom: 0px;
+    /* position: absolute; */
+    /* bottom: 0px;
     left: 0px;
     right: 0px;
-    padding: 15px 0px;
+    padding: 15px 0px; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -65,11 +65,11 @@ table, th {
     /* width: 100vw; */
     width: 100%;
     align-self: center;
-    margin: 0px 0px;
-    background-color: #fff;
-    padding: 30px auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+    margin: 10px 0px;
+    /* background-color: #fff; */
+    padding: 10px auto;
+    /* border-radius: 8px; */
+    /* box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3); */
     /* display: none; */
 }
 .print-button {
@@ -80,13 +80,13 @@ table, th {
     font-weight: 600;
     font-size: 17px;
     border: none;
-    padding: 15px 50px;
+    padding: 15px 10px;
     border-radius: 4px;
     cursor: pointer;
 }
 .footer {
     opacity: .5;
-    margin: 0px 30px;
+    margin: 0px 10px;
 }
 .details{
     /* opacity: .5; */
@@ -102,9 +102,9 @@ table, th {
     /* color: #13be3e; */
     font-weight: 600;
     font-size: 17px;
-    margin: 0px 30px;
+    /* margin: 0px 15px; */
     border: none;
-    padding: 15px 50px;
+    padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;

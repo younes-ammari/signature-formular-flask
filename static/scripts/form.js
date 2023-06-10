@@ -8,13 +8,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Signature canvas
     const canvas = document.getElementById('signatureCanvas');
     const context = canvas.getContext('2d');
-    
+
     window.addEventListener('resize', resizeCanvas);
 
     function resizeCanvas() {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-    // Perform any additional resizing logic or re-rendering here if needed
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        // Perform any additional resizing logic or re-rendering here if needed
     }
 
     // Call the resizeCanvas function initially to set the canvas size
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var rect = canvas.getBoundingClientRect(); // Get the position of the canvas relative to the viewport
     var lastX = 0;
     var lastY = 0;
-    
+
     let ongoingTouches = [];
 
     function handleTouchStart(event) {
@@ -95,6 +95,50 @@ document.addEventListener("DOMContentLoaded", function () {
     // canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', stopDrawing);
     canvas.addEventListener('mouseout', stopDrawing);
+    canvas.addEventListener('touchstart', handleTouchStart, false);
+    canvas.addEventListener('touchmove', handleTouchMove, false);
+    canvas.addEventListener('touchend', handleTouchEnd, false);
+
+    // let isDrawing = false;
+
+    function handleTouchStart(event) {
+        isDrawing = true;
+    }
+
+    function handleTouchMove(event) {
+        if (isDrawing) {
+            let touch = event.touches[0];
+            let rect = canvas.getBoundingClientRect();
+            let offsetX = touch.clientX - rect.left;
+            let offsetY = touch.clientY - rect.top;
+            // signaturePad.strokeMoveTo(offsetX, offsetY);
+            // signaturePad.lineTo(offsetX, offsetY);
+            // signaturePad.stroke();
+        }
+    }
+
+    function handleTouchEnd(event) {
+        isDrawing = false;
+        let signatureData = signaturePad.toDataURL();
+        console.log('signatureData', signatureData)
+        // const signatureData = canvas.toDataURL();  // Convert canvas to data URL
+        const signatureInput = document.getElementById('signatureInput');
+        signatureInput.value = signatureData;
+    }
+
+    function stopDrawing() {
+        isDrawing = false;
+        console.log("stoped")
+        captureSignature();
+    }
+
+    function captureSignature() {
+        let signatureData = signaturePad.toDataURL();  // Convert canvas to data URL
+        console.log('signatureData', signatureData)
+        // const signatureData = canvas.toDataURL();  // Convert canvas to data URL
+        const signatureInput = document.getElementById('signatureInput');
+        signatureInput.value = signatureData;
+    }
 
     function startDrawing(event) {
         isDrawing = true;
@@ -114,12 +158,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function stopDrawing() {
         isDrawing = false;
+        console.log("stoped")
         captureSignature();
     }
 
     function captureSignature() {
-        let signatureData = signaturePad.toDataURL();
-
+        let signatureData = signaturePad.toDataURL();  // Convert canvas to data URL
+        console.log('signatureData', signatureData)
         // const signatureData = canvas.toDataURL();  // Convert canvas to data URL
         const signatureInput = document.getElementById('signatureInput');
         signatureInput.value = signatureData;
@@ -138,6 +183,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    
+
     console.log("HTML page has loaded.");
 });

@@ -65,17 +65,21 @@ def generate_pdf(records):
                     'data:image/png;base64,', '')
                 signature_path = f'signature{i}.png'
 
-                with open(signature_path, 'wb') as file:
-                    file.write(base64.b64decode(signature_data))
+                try:
 
-                # Draw border around signature image
-                pdf.set_draw_color(0, 0, 0)  # Set border color (black)
-                # pdf.rect( w=40, h=10)  # Draw rectangle as border
-                # Draw rectangle as border
-                pdf.rect(x=pdf.x, y=pdf.y, w=40, h=10)
-                pdf.image(signature_path, w=40, h=10)
-                signature_paths.append(signature_path)
-                # pdf.image(item, x=10, y=pdf.y, w=40)
+                    with open(signature_path, 'wb') as file:
+                        file.write(base64.b64decode(signature_data))
+
+                    # Draw border around signature image
+                    pdf.set_draw_color(0, 0, 0)  # Set border color (black)
+                    # pdf.rect( w=40, h=10)  # Draw rectangle as border
+                    # Draw rectangle as border
+                    pdf.rect(x=pdf.x, y=pdf.y, w=40, h=10)
+                    pdf.image(signature_path, w=40, h=10)
+                    signature_paths.append(signature_path)
+                    # pdf.image(item, x=10, y=pdf.y, w=40)
+                except:
+                    pass
 
             else:
                 pdf.cell(40, 10, str(value), border=1)
@@ -168,7 +172,7 @@ def pdf():
 @app.route('/records')
 def records():
     admin = False
-    
+
     existing_records = []
     try:
         with open(json_file, 'r') as file:
@@ -182,9 +186,9 @@ def records():
 
 @app.route('/records/<code>')
 def records_admin(code):
-    admin = code=="9999"
+    admin = code == "9999"
     print(admin)
-    
+
     existing_records = []
     try:
         with open(json_file, 'r') as file:
