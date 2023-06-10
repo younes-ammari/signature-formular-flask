@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Submitted Records</title>
+    <link rel="stylesheet" href="../static/css/pdf.css">
+    <!-- <script src="{{ url_for('static', filename='/scripts/pdf.js') }}"></script> -->
+    <script src="../static/scripts/pdf.js"></script>
+
+</head>
+
+<body class="contaisner">
+    <div class="print-container">
+        <!-- <button class="print-button" onclick="printPage()">Print Records</button> -->
+        <a class="add-button" href="/">Add another record</a>
+        <p class="footer">developed by: younes ammari</p>
+
+    </div>
+    <div class="container" id="print_view">
+
+        <h1 class="title">Submitted Records</h1>
+        <p>Total number: {{ length }}</p>
+        <table>
+            <tr class="table-headers">
+                <th>Full Name</th>
+                <!-- <th>Phone</th> -->
+                <th>Student Card ID</th>
+                <th>Signature</th>
+            </tr>
+            {% for record in records %}
+            <tr>
+                <td>{{ record['Full Name'] }}</td>
+                <!-- <td>{{ record['Phone'] }}</td> -->
+                <td>{{ record['Student Card ID'][0:4]+"-- -- -- " if not admin  else record['Student Card ID'] }}</td>
+                <td class="image-div"><img src="{{ record['Signature'] }}" width="130" height="50"></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p class="details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae porro asperiores aperiam eos impedit mollitia, blanditiis laborum nulla perspiciatis maiores vero illo ullam rerum necessitatibus inventore doloribus ut omnis corrupti!</p>
+    </div>
+
+    
+</body>
+<!-- <script src="../static/js/pdf.js"></script> -->
+
+</html>

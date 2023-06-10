@@ -1,0 +1,110 @@
+
+/* Body and container styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+table {
+    border-collapse: collapse;
+    max-width: 800px;
+    width: 100%;
+}
+table, th, td {
+    border: 1px solid black;
+    padding: 5px;
+}
+table, th {
+    border: 1px solid black;
+    padding: 5px;
+    /* font-size: 22px; */
+}
+
+/* .container{
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 5vw;
+    padding-right: 5vw;
+} */
+
+.table-headers{
+    background-color: black;
+    color: white;
+}
+.title{
+    text-align: center;
+    
+}
+
+
+.print-container {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 15px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* max-width: 600px; */
+    /* width: 100vw; */
+    width: 100%;
+    align-self: center;
+    margin: 0px 0px;
+    background-color: #fff;
+    padding: 30px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+    /* display: none; */
+}
+.print-button {
+    /* background-color: #a3aab6; */
+    background-color: transparent;
+    color: #fff;
+    color: black;
+    font-weight: 600;
+    font-size: 17px;
+    border: none;
+    padding: 15px 50px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.footer {
+    opacity: .5;
+    margin: 0px 30px;
+}
+.details{
+    /* opacity: .5; */
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.add-button {
+    background-color: #a3aab6;
+    background-color: #13be3e;
+    /* background-color: transparent; */
+    color: #fff;
+    /* color: #13be3e; */
+    font-weight: 600;
+    font-size: 17px;
+    margin: 0px 30px;
+    border: none;
+    padding: 15px 50px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}

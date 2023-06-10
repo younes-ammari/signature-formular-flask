@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- <html> -->
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/css/form.css">
+    <title>Student Information Form</title>
+    <script src="../static/scripts/form.js"></script>
+
+</head>
+
+<body class="container">
+    <style>
+        .image {
+            height: 150px;
+            opacity: .6;
+            min-width: 100%;
+            border-radius: 4px;
+            background: url("{{ url_for('static',filename='assets/images/promo0.jpg') }}") no-repeat 0px 0px;
+            background-size: cover;
+        }
+    </style>
+
+    <!-- <img id="logo" class="image" src="{{url_for('static', filename='assets/images/promo.png')}}" alt="Léelo"> -->
+    <!-- <img class="image" src="../assets/images/promo.png" width="800" height="150"/> -->
+    <div class="image"></div>
+    <h1 class="title">Student Information Form</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis animi laborum minus ipsa quae excepturi
+        veritatis at corporis omnis corrupti. Mollitia iure temporibus accusamus, minima aspernatur eaque magni
+        voluptatum! Dolorum?</p>
+    <form action="/submit" method="post" id="registration-form">
+        <label for="first_name">First name:</label>
+        <input type="text" name="first_name" id="first_name" required><br><br>
+        <label for="family_name">Family name:</label>
+        <input type="text" name="family_name" id="family_name" required><br><br>
+
+        <!-- <label for="phone">Phone:</label> -->
+        <!-- <input type="text" name="phone" id="phone" required><br><br> -->
+
+        <label for="student_card_id">Student Card ID:</label>
+        <input type="text" name="student_card_id" id="student_card_id" required><br><br>
+
+        <label for="signature">Signature:</label>
+        <div class="canvas-div">
+            <canvas id="signatureCanvas" width="400" height="200"></canvas><br>
+            <button type="button" id="clear-button">Clear</button><br><br>
+            <input type="hidden" name="signature" id="signatureInput" required>
+        </div>
+
+        <input type="submit" value="Submit">
+    </form>
+    <div class="footer-container">
+        <p class="footer">developed by: younes ammari</p>
+        <a href="/records" class="all-records">See all records</a>
+    </div>
+
+</body>
+
+</html>
