@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function handleTouchEnd(event) {
         isDrawing = false;
         let signatureData = signaturePad.toDataURL();
-        console.log('signatureData', signatureData)
+        // console.log('signatureData', signatureData)
         // const signatureData = canvas.toDataURL();  // Convert canvas to data URL
         const signatureInput = document.getElementById('signatureInput');
         signatureInput.value = signatureData;
@@ -128,13 +128,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function stopDrawing() {
         isDrawing = false;
-        console.log("stoped")
+        // console.log("stoped")
         captureSignature();
     }
 
     function captureSignature() {
         let signatureData = signaturePad.toDataURL();  // Convert canvas to data URL
-        console.log('signatureData', signatureData)
+        // console.log('signatureData', signatureData)
         // const signatureData = canvas.toDataURL();  // Convert canvas to data URL
         const signatureInput = document.getElementById('signatureInput');
         signatureInput.value = signatureData;
@@ -158,17 +158,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function stopDrawing() {
         isDrawing = false;
-        console.log("stoped")
+        // console.log("stoped")
         captureSignature();
     }
 
-    function captureSignature() {
-        let signatureData = signaturePad.toDataURL();  // Convert canvas to data URL
-        console.log('signatureData', signatureData)
-        // const signatureData = canvas.toDataURL();  // Convert canvas to data URL
-        const signatureInput = document.getElementById('signatureInput');
-        signatureInput.value = signatureData;
-    }
 
     document.getElementById("clear-button").addEventListener("click", function (event) {
         clearSignature(event)
