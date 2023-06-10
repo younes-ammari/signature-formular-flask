@@ -21,6 +21,7 @@ table {
     border-collapse: collapse;
     max-width: 800px;
     width: 100%;
+    min-width: 100%;
 }
 table, th, td {
     border: 1px solid black;
