@@ -122,10 +122,10 @@ td {
 
 .add-button {
     background-color: #a3aab6;
-    background-color: #13be3e;
+    background-color: #39D369;
     /* background-color: transparent; */
     color: #fff;
-    /* color: #13be3e; */
+    /* color: #39D369; */
     font-weight: 600;
     font-size: 14px;
     /* margin: 0px 15px; */
@@ -134,4 +134,15 @@ td {
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
+}
+
+* {
+    font-family: 'Tajawal' !important;
+    text-align: right;
+    direction: rtl;
+}
+
+.td-id-card{
+    direction: ltr;
+
 }

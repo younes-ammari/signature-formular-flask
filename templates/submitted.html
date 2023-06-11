@@ -7,10 +7,12 @@
 
 </head>
 <body class="container">
-    <h1>Form Submitted Successfully</h1>
-    <p>Thank you for your submission!</p>
+    <!-- <img src="../assets/images/success.gif"/> -->
+    <img class="success" src="{{ url_for('static',filename='assets/images/success.gif') }}"/>
+    <h1>تم تسجيل امضاءك بنجاح</h1>
+    <p>شكراً لوقتك</p>
     <!-- <a href="/" class="home-link">Return to Form</a> -->
-    <a href="/records" class="home-link">See all records</a>
-    <a href="/" class="add-other">add other record</a>
+    <a href="/records" class="home-link">مشاهدة جميع الامضاءات</a>
+    <a href="/" class="add-other">اضافة تسجيل جديد</a>
 </body>
 </html>

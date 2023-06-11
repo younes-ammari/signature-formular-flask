@@ -7,56 +7,71 @@
     <script src="https://unpkg.com/signature_pad"></script>
     <script src="../static/scripts/form.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;400;500;700;900&display=swap"
+        rel="stylesheet">
 
 </head>
 
-<body class="container">
-    <style>
-        .image {
-            height: 150px;
-            opacity: .6;
-            min-width: 100%;
-            border-radius: 4px;
-            background: url("{{ url_for('static',filename='assets/images/promo0.jpg') }}") no-repeat 0px 0px;
-            background-size: cover;
-        }
-    </style>
+<body>
+    <div class="loading-container">
+        <!-- <img src="./assets//images//logo.png" class="logo-loading" /> -->
+        <div class="loading-spinner"></div>
+    </div>
+    <div class="loaded-content">
+        <div class="container">
+            <style>
+                .image {
+                    height: 150px;
+                    opacity: .6;
+                    min-width: 100%;
+                    border-radius: 4px;
+                    background: url("{{ url_for('static',filename='assets/images/resid.jpg') }}") no-repeat 0px 0px;
+                    background-size: cover;
+                }
+            </style>
 
-    <!-- <img id="logo" class="image" src="{{url_for('static', filename='assets/images/promo.png')}}" alt="Léelo"> -->
-    <!-- <img class="image" src="../assets/images/promo.png" width="800" height="150"/> -->
-    <div class="image"></div>
-    <h1 class="title">Student Information Form</h1>
+            <!-- <img id="logo" class="image" src="{{url_for('static', filename='assets/images/promo.png')}}" alt="Léelo"> -->
+            <!-- <img class="image" src="../assets/images/promo.png" width="800" height="150"/> -->
+            <div class="image"></div>
+            <!-- <h1 class="title">Student Information Form</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis animi laborum minus ipsa quae excepturi
         veritatis at corporis omnis corrupti. Mollitia iure temporibus accusamus, minima aspernatur eaque magni
-        voluptatum! Dolorum?</p>
-    <form action="/submit" method="post" id="registration-form">
-        <label for="first_name">First name:</label>
-        <input type="text" name="first_name" id="first_name" required><br><br>
-        <label for="family_name">Family name:</label>
-        <input type="text" name="family_name" id="family_name" required><br><br>
+        voluptatum! Dolorum?</p> -->
+            <h1 class="title">{{details['title']}}</h1>
+            <p>{{details["description"]}}</p>
+            <p>{{details["this"]}}</p>
+            <form action="/submit" method="post" id="registration-form">
+                <label for="first_name">الاسم</label>
+                <input type="text" name="first_name" id="first_name" required><br><br>
+                <label for="family_name">اللقب</label>
+                <input type="text" name="family_name" id="family_name" required><br><br>
+                <label for="room">رقم الغرفة و الجناح</label>
+                <input type="text" name="room" id="room" required><br><br>
 
-        <!-- <label for="phone">Phone:</label> -->
-        <!-- <input type="text" name="phone" id="phone" required><br><br> -->
+                <!-- <label for="phone">Phone:</label> -->
+                <!-- <input type="text" name="phone" id="phone" required><br><br> -->
 
-        <label for="student_card_id">Student Card ID:</label>
-        <input type="text" name="student_card_id" id="student_card_id" required><br><br>
+                <label for="student_card_id">رقم بطاقة الطالب</label>
+                <input type="text" name="student_card_id" id="student_card_id" required><br><br>
 
-        <label for="signature">Signature:</label>
-        <div class="canvas-div">
-            <canvas id="signatureCanvas" width="350" height="200"></canvas><br>
-            <!-- <canvas id="signatureCanvas"></canvas><br> -->
-            <button type="button" id="clear-button">Clear</button><br><br>
-            <input type="hidden" name="signature" id="signatureInput" required>
+                <label for="signature">الامضاء</label>
+                <div class="canvas-div">
+                    <canvas id="signatureCanvas" width="350" height="200"></canvas><br>
+                    <!-- <canvas id="signatureCanvas"></canvas><br> -->
+                    <button type="button" id="clear-button">مسح</button><br><br>
+                    <input type="hidden" name="signature" id="signatureInput" required>
+                </div>
+
+                <input type="submit" value="ارسال" >
+            </form>
+            <div class="footer-container">
+                <p class="footer">طور من طرف: يونس عماري</p>
+                <a href="/records" class="all-records">مشاهدة جميع الامضاءات</a>
+            </div>
         </div>
-
-        <input type="submit" value="Submit">
-    </form>
-    <div class="footer-container">
-        <p class="footer">developed by: younes ammari</p>
-        <a href="/records" class="all-records">See all records</a>
     </div>
-
 </body>
 
 </html>

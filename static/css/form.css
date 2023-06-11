@@ -1,6 +1,20 @@
+
+:root {
+    margin: 0px;
+    /* font-size: 62px; */
+
+    font-family: 'Tajawal' !important;
+    /* Define base font size */
+    /* Add this line to apply Amiri font as default t*/
+
+}
+
+
 /* Signature Canvas styling */
 #signatureCanvas {
     /* width: 100%; */
+    /* min-width: 200px;
+    min-height: 150px; */
     max-width: 100%;
     height: auto;
     max-height: 200px;
@@ -13,6 +27,7 @@
     /* Set the cursor to a crosshair */
 }
 
+
 /* Signature div styling */
 .canvas-div {
     align-items: center;
@@ -23,16 +38,25 @@
 
 /* Body and container styling */
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
-    background-color: #f8f8f8;
+    /* background-color: #f8f8f8; */
+    text-align: right;
+}
+
+.title {
+
+    /* font-weight: 300; */
+    font-size: 19px;
+    font-weight: bold;
 }
 
 p {
 
-    font-weight: 300;
+    /* font-weight: 300; */
     font-size: 17px;
+}
+input{
+    text-align: right;
 }
 
 .footer {
@@ -57,9 +81,14 @@ p {
 }
 
 .container {
+    
+    padding: 20px;
+    /* display: flex; */
+    /* flex-direction: column; */
     max-width: 600px;
-    margin: 30px auto;
+    margin: 30px 10px;
     background-color: #fff;
+    /* background-color: red; */
     padding: 30px;
     padding-bottom: 10px;
     border-radius: 8px;
@@ -99,6 +128,7 @@ input[type="submit"] {
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
+    text-align: center;
     font-weight: 500;
     font-size: 17px;
     margin-top: 20px;
@@ -113,4 +143,49 @@ input[type="submit"] {
     font-weight: 300;
     font-size: 14px;
     cursor: pointer;
+}
+
+/* CSS for the loading effect */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-container {
+    position: absolute;
+    z-index: 11;
+    width: 100vw;
+    display: flex;
+    display: none;
+    margin: 0px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 100vh;
+}
+
+.loading-spinner {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid rgb(0, 67, 101);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+}
+
+.loaded-content {
+    /* display: none; */
+    /* display: contents; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+* {
+    font-family: 'Tajawal' !important;
 }

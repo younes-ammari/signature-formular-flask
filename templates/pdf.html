@@ -13,37 +13,40 @@
 <body class="contasiner">
     <div class="print-container">
 
-        <!-- <button class="print-button" onclick="printPage()">Print Records</button> -->
-        <a class="add-button" href="/">Add another record</a>
-        <p class="footer">developed by: younes ammari</p>
+        <a class="add-button" href="/">اضافة تسجيل جديد</a>
+        {% if admin %}
+        <button class="print-button" onclick="printPage()">طباعة</button>
+        {% endif %}
+        <p class="footer">طور من طرف: يونس عماري</p>
 
     </div>
     <div class="container" id="print_view">
 
-        <h1 class="title">Submitted Records</h1>
-        <p>Total number: {{ length }}</p>
+        <h1 class="title">الامضاءات المسجلة</h1>
+        <p> العدد الاجمالي  {{ length }}</p>
         <div class="table-container">
             <table>
                 <tr class="table-headers">
-                    <th>Full Name</th>
+                    <th>الاسم الكامل</th>
                     <!-- <th>Phone</th> -->
-                    <th>Student Card ID</th>
-                    <th>Signature</th>
+                    <th>رقم الغرفة و الجناح</th>
+                    <th>رقم بطاقة الطالب</th>
+                    <th>الامضاء</th>
                 </tr>
                 {% for record in records %}
                 <tr>
                     <td>{{ record['Full Name'] }}</td>
                     <!-- <td>{{ record['Phone'] }}</td> -->
-                    <td>{{ record['Student Card ID'][0:4]+"-- -- -- " if not admin else record['Student Card ID'] }}
+                    <td>{{"تظهر فقط للمسؤول" if not admin else record['Room'] }}</td>
+                    <td class="td-id-card">{{ record['Student Card ID'][0:4]+"-- -- -- " if not admin else record['Student Card ID'] }}
                     </td>
                     <td class="image-div"><img src="{{ record['Signature'] }}" width="130" height="50"></td>
                 </tr>
                 {% endfor %}
             </table>
         </div>
-        <p class="details">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae porro asperiores aperiam
-            eos impedit mollitia, blanditiis laborum nulla perspiciatis maiores vero illo ullam rerum necessitatibus
-            inventore doloribus ut omnis corrupti!</p>
+        <p class="details">{{details}}</p>
+        
     </div>
 
 

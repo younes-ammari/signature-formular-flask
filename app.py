@@ -8,6 +8,14 @@ import json
 # template_dir = os.path.abspath('../../frontend/src')
 # app = Flask(__name__, template_folder=template_dir)
 app = Flask(__name__)
+
+details = {
+    "title": "طلب توفير الاقامة في شهر اوت",
+    "description": '''
+    نظراً لوجودة مشكلة توفر الغرف الخاصة بطلبة السنة السابعة تخصص طب بالنسبة للاقامة الجامعية
+    محمد الامين دباغين وغلقها من طرف الادارة ''',
+    "this": "هذا الاستبيان هو لتسجيل الطلبة المحتاجين لفتح غرفهم اثناء شهر أوت القادم 2023 من اجل تقديمها لادارة الكلية كي يتم فتح الغرف لنا "
+}
 demo = [
     {
         'Full Name': 'ezfzef',
@@ -103,7 +111,7 @@ def generate_pdf(records):
 
 @app.route('/')
 def index():
-    return render_template('form.html')
+    return render_template('form.html', details=details)
 
 
 @app.route('/submit', methods=['POST'])
@@ -112,6 +120,7 @@ def submit():
     # Retrieve form inputs
     first_name = request.form['first_name']
     family_name = request.form['family_name']
+    room = request.form['room']
     full_name = first_name + " " + family_name
     phone = "00000000000"
     student_card_id = request.form['student_card_id']
@@ -120,6 +129,7 @@ def submit():
     new_record = {
         'Full Name': full_name,
         'Phone': phone,
+        "Room":room,
         'Student Card ID': student_card_id,
         'Signature': signature_image
     }
@@ -181,7 +191,7 @@ def records():
         pass
     cp = [*demo, *demo, *demo, *demo, *demo, *demo, *demo, *demo]
     global student_records
-    return render_template('pdf.html', records=existing_records, length=len(existing_records), admin=admin)
+    return render_template('pdf.html', records=existing_records, length=len(existing_records), details=details['this'], admin=admin)
 
 
 @app.route('/records/<code>')
@@ -199,7 +209,7 @@ def records_admin(code):
     global student_records
     if not admin:
         return redirect("/records")
-    return render_template('pdf.html', records=existing_records, length=len(existing_records), admin=admin)
+    return render_template('pdf.html', records=existing_records, length=len(existing_records), details=details['this'], admin=admin)
 
 
 if __name__ == '__main__':

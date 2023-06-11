@@ -40,8 +40,8 @@ p {
 .add-other {
     font-size: 15px;
     color: white;
-    color: #333;
-    font-weight: 500;
+    color: #39D369;
+    font-weight: 600;
     text-decoration: none;
     
     padding: 10px 20px;
@@ -49,11 +49,11 @@ p {
 
 .home-link {
     font-size: 20px;
-    color: #2ce65a;
+    color: #39D369;
     text-decoration: none;
-    border: 2px solid #2ce65a;
+    border: 2px solid #39D369;
     border-radius: 4px;
-    background-color: #2ce65a;
+    background-color: #39D369;
     color: #fff;
     opacity: .7;
     padding: 10px 20px;
@@ -62,6 +62,16 @@ p {
 
 .home-link:hover {
     opacity: 1;
-    background-color: #2ce65a;
+    background-color: #39D369;
     color: #fff;
+}
+.success{
+    height: 210px;
+    width: auto;
+
+}
+* {
+    font-family: 'Tajawal' !important;
+    text-align: right;
+    direction: rtl;
 }

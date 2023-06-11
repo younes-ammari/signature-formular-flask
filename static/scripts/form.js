@@ -1,7 +1,18 @@
+document.fonts.ready.then(function () {
+    setTimeout(() => {
+
+        document.querySelector('.loading-container').style.display = 'none';
+        // document.querySelector('.loaded-content').style.display = 'contents';
+        // document.getElementById('loaded-content').className = "container"
+    }, 900);
+});
+
 
 document.addEventListener("DOMContentLoaded", function () {
     // Code to be executed after the HTML page has loaded
     // ...
+    // JavaScript to hide the loading spinner and show the loaded content
+
 
     // Example: Display a message in the console
 
