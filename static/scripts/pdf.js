@@ -8,3 +8,12 @@ function printPage() {
     document.body.innerHTML = originalContents;
     console.log('clicked')
 }
+async function downloadPage() {
+    var url = window.location.href; 
+     // if you have static url you can hard code like
+     // var url = "http://www.url.com";
+    
+     location.href = '/save'
+    
+    // fetch("/save")
+}

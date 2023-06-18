@@ -3,6 +3,20 @@ from fpdf import FPDF
 import os
 import base64
 import json
+import datetime
+
+from pymongo import MongoClient
+
+online = True
+password = "innova22"
+username = "innovaQCM"
+localURL = 'mongodb://localhost:27017/'
+onlineURL = f'mongodb+srv://{username}:{password}@innovaqcm.pitnb2l.mongodb.net/?retryWrites=true&w=majority'
+
+
+CLIENT = MongoClient(onlineURL if online else localURL)
+DATA_BASE = CLIENT['form']
+RECORDS = DATA_BASE['records']
 
 
 # template_dir = os.path.abspath('../../frontend/src')
@@ -129,13 +143,16 @@ def submit():
     new_record = {
         'Full Name': full_name,
         'Phone': phone,
-        "Room":room,
+        "Room": room,
         'Student Card ID': student_card_id,
         'Signature': signature_image
     }
 
     # Append record to student_records list
     student_records.append(new_record)
+    cp = new_record.copy()
+    print(cp)
+    RECORDS.insert_one(cp)
 
     # Load existing records from JSON file
     existing_records = []
@@ -149,16 +166,12 @@ def submit():
     existing_records.append(new_record)
 
     # Write updated records to JSON file
-    with open(json_file, 'w') as file:
-        json.dump(existing_records, file, indent=4)
-    # print(student_records)
-
-    # Render form.html template with the updated records
-
+    temp_name = datetime.datetime.now().strftime('%Y_%m_%d_%H-%M-%S.%f')
+    temp_file = "new/new_"+ full_name[:8]  + "_"+temp_name + ".json"  # or whatever extension is needed
+    with open(temp_file, "w") as f:
+        json.dump(existing_records, f, indent=4)
+    
     return redirect("/submitted")
-    return render_template('form.html')
-
-    return f'Form submitted successfully! <a href="/">Back</a>'
 
 
 @app.route('/submitted')
@@ -181,36 +194,66 @@ def pdf():
 
 @app.route('/records')
 def records():
+    all_recs = list(RECORDS.find({}))
+
+    for a in all_recs:
+        a.pop('_id')
     admin = False
 
-    existing_records = []
-    try:
-        with open(json_file, 'r') as file:
-            existing_records = json.load(file)
-    except FileNotFoundError:
-        pass
-    cp = [*demo, *demo, *demo, *demo, *demo, *demo, *demo, *demo]
-    global student_records
+    existing_records = all_recs
     return render_template('pdf.html', records=existing_records, length=len(existing_records), details=details['this'], admin=admin)
 
 
 @app.route('/records/<code>')
 def records_admin(code):
     admin = code == "9999"
+    backup = code == "backup9"
     print(admin)
 
-    existing_records = []
+    all_recs = list(RECORDS.find({}))
+
+    for a in all_recs:
+        a.pop('_id')
+
+    existing_records = all_recs
+
+    if admin:
+        return render_template('pdf.html', records=existing_records, length=len(existing_records), details=details['this'], admin=True)
+    elif backup:
+        try:
+            temp_name = datetime.datetime.now().strftime('%Y_%m_%d_%H-%M-%S.%f')
+            temp_file = "backup/backup_"+temp_name + ".json"  # or whatever extension is needed
+            with open(temp_file, "w") as f:
+                json.dump(existing_records, f, indent=4)
+
+            return send_file(temp_file, as_attachment=True)
+        except FileNotFoundError:
+            return redirect("/records")
+
+            pass
+    else:
+        # return render_template('pdf.html', records=existing_records, length=len(existing_records), details=details['this'], admin=admin)
+        return redirect("/records")
+
+
+@app.route('/save')
+def save():
+    
+    all_recs = list(RECORDS.find({}))
+
+    for a in all_recs:
+        a.pop('_id')
+
+    existing_records = all_recs
     try:
-        with open(json_file, 'r') as file:
-            existing_records = json.load(file)
+        temp_name = datetime.datetime.now().strftime('%Y_%m_%d_%H-%M-%S.%f')
+        temp_file = "backup/backup_"+temp_name + ".json"  # or whatever extension is needed
+        with open(temp_file, "w") as f:
+            json.dump(existing_records, f, indent=4)
+
+        return send_file(temp_file, as_attachment=True)
     except FileNotFoundError:
         pass
-    cp = [*demo, *demo, *demo, *demo, *demo, *demo, *demo, *demo]
-    global student_records
-    if not admin:
-        return redirect("/records")
-    return render_template('pdf.html', records=existing_records, length=len(existing_records), details=details['this'], admin=admin)
-
 
 if __name__ == '__main__':
     app.run(debug=True)

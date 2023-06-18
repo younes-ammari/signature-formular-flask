@@ -108,6 +108,18 @@ td {
     cursor: pointer;
 }
 
+.download-button {
+    /* background-color: #a3aab6; */
+    background-color: transparent;
+    color: #39D369;
+    font-weight: 600;
+    font-size: 17px;
+    border: none;
+    padding: 15px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 .footer {
     opacity: .5;
     margin: 0px 10px;
