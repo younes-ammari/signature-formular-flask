@@ -29,9 +29,9 @@
             <table>
 
                 <tr class="table-headers">
-                    {% if admin %}
+                    <!-- {% if admin %}
                     <td>تعديل</td>
-                    {% endif %}
+                    {% endif %} -->
                     <th>الاسم الكامل</th>
                     <!-- <th>Phone</th> -->
                     <th>رقم الغرفة و الجناح</th>
@@ -41,7 +41,7 @@
 
                 {% for index, record in records|enumerate_records %}
                 <tr>
-                    {% if admin %}
+                    <!-- {% if admin %}
 
                     <td>
                         <form method="post" action="/records/9999">
@@ -49,7 +49,7 @@
                             <button type="submit">Delete</button>
                         </form>
                     </td>
-                    {% endif %}
+                    {% endif %} -->
 
                     <td>{{ record['Full Name'] }}</td>
                     <!-- <td>{{ record['Phone'] }}</td> -->
