@@ -24,30 +24,49 @@
     <div class="container" id="print_view">
 
         <h1 class="title">الامضاءات المسجلة</h1>
-        <p> العدد الاجمالي  {{ length }}</p>
+        <p> العدد الاجمالي {{ length }}</p>
         <div class="table-container">
             <table>
+
                 <tr class="table-headers">
+                    {% if admin %}
+                    <td>تعديل</td>
+                    {% endif %}
                     <th>الاسم الكامل</th>
                     <!-- <th>Phone</th> -->
                     <th>رقم الغرفة و الجناح</th>
                     <th>رقم بطاقة الطالب</th>
                     <th>الامضاء</th>
                 </tr>
-                {% for record in records %}
+
+                {% for index, record in records|enumerate_records %}
                 <tr>
+                    {% if admin %}
+
+                    <td>
+                        <form method="post" action="/records/9999">
+                            <input type="hidden" name="delete" value="{{ index }}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                    {% endif %}
+
                     <td>{{ record['Full Name'] }}</td>
                     <!-- <td>{{ record['Phone'] }}</td> -->
                     <td>{{"تظهر فقط للمسؤول" if not admin else record['Room'] }}</td>
-                    <td class="td-id-card">{{ record['Student Card ID'][0:4]+"-- -- -- " if not admin else record['Student Card ID'] }}
+                    <td class="td-id-card">{{ record['Student Card ID'][0:4]+"-- -- -- " if not admin else
+                        record['Student Card ID'] }}
                     </td>
                     <td class="image-div"><img src="{{ record['Signature'] }}" width="130" height="50"></td>
+
+
                 </tr>
+
                 {% endfor %}
             </table>
         </div>
         <p class="details">{{details}}</p>
-        
+
     </div>
 
 

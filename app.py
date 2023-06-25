@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, send_file
+from flask import Flask, render_template, jsonify, redirect, request, send_file
 from fpdf import FPDF
 import os
 import base64
@@ -181,6 +181,7 @@ def submitted():
 
 @app.route('/pdf')
 def pdf():
+    json_file=""
     existing_records = []
     try:
         with open(json_file, 'r') as file:
@@ -190,6 +191,22 @@ def pdf():
 
     pdf_file = generate_pdf(existing_records)
     return send_file(pdf_file, as_attachment=False)
+
+
+@app.route('/edit/<code>')
+def edit(code):
+    code = "9999"
+    json_file=""
+    existing_records = []
+    try:
+        with open(json_file, 'r') as file:
+            existing_records = json.load(file)
+    except FileNotFoundError:
+        pass
+
+    pdf_file = generate_pdf(existing_records)
+    return send_file(pdf_file, as_attachment=False)
+
 
 
 @app.route('/records')
@@ -203,8 +220,12 @@ def records():
     existing_records = all_recs
     return render_template('pdf.html', records=existing_records, length=len(existing_records), details=details['this'], admin=admin)
 
+# Custom Jinja2 filter to enumerate records
+@app.template_filter('enumerate_records')
+def enumerate_records(records):
+    return list(enumerate(records))
 
-@app.route('/records/<code>')
+@app.route('/records/<code>', methods=['GET', 'POST'])
 def records_admin(code):
     admin = code == "9999"
     backup = code == "backup9"
@@ -218,6 +239,10 @@ def records_admin(code):
     existing_records = all_recs
 
     if admin:
+        if request.method == 'POST':
+            record_index = int(request.form['delete'])
+            del existing_records[record_index]
+            print("len", len(existing_records))
         return render_template('pdf.html', records=existing_records, length=len(existing_records), details=details['this'], admin=True)
     elif backup:
         try:
@@ -234,6 +259,22 @@ def records_admin(code):
     else:
         # return render_template('pdf.html', records=existing_records, length=len(existing_records), details=details['this'], admin=admin)
         return redirect("/records")
+
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    existing_records = []
+    if request.method == 'POST':
+        file = request.files['json_file']
+        if file.filename.endswith('.json'):
+            existing_records = json.load(file)
+            return render_template('pdf.html', records=existing_records, length=len(existing_records), details=details['this'], admin=True)
+            return jsonify(existing_records)
+        
+        
+    return render_template('upload.html', records=existing_records, length=len(existing_records), details=details['this'], admin=True)
+    
+    return render_template('upload.html')
 
 
 @app.route('/save')
@@ -254,6 +295,8 @@ def save():
         return send_file(temp_file, as_attachment=True)
     except FileNotFoundError:
         pass
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
